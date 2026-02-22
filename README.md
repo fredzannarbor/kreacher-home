@@ -123,6 +123,26 @@ Requires Full Disk Access for Terminal (System Settings → Privacy & Security �
 | `kreacher-home.py` | Main controller — natural language parser + device control |
 | `kreacher-thinq.py` | LG ThinQ appliance integration (cloud API) |
 | `kreacher-listener.sh` | Background daemon for iMessage + iCloud commands |
+| `check-pii.sh` | PII scanner — run before pushing to catch leaked IPs, phone numbers, etc. |
+
+## Before You Push Your Fork
+
+This repo ships placeholder IPs and a dummy phone number. After you customize it with your real device info, run the PII checker before committing:
+
+```bash
+./check-pii.sh
+```
+
+It scans for:
+- Real (non-example) IP addresses
+- Phone numbers
+- Email addresses
+- Home directory paths with usernames
+- API tokens or secrets
+- MAC addresses
+- Specific Samsung/LG model numbers that could identify your household
+
+Exit code 0 = clean, exit code 1 = potential PII found.
 
 ## How It Was Built
 
